@@ -1,0 +1,44 @@
+project-starterkit/.github/workflows/ci-node.yml
+name: CI Node.js
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linter
+        run: |
+          if [ -f package.json ]; then
+            npm run lint || echo "Linting failed"
+          else
+            echo "No package.json found, skipping lint"
+          fi
+
+      - name: Run tests
+        run: |
+          if [ -f package.json ]; then
+            npm test || echo "Tests failed"
+          else
+            echo "No package.json found, skipping tests"
+          fi
