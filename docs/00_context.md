@@ -1,39 +1,44 @@
 # Project Context
 
-## Overview
-Ringkasan proyek: tujuan, target pengguna, dan masalah yang ingin diselesaikan.
+**Stop. Don't fill this template until you can answer one question: What problem are you actually solving?**
 
-## Platform
-Bot / Web / API / CLI / Hybrid.
+## The Real Problem
+**What specific pain do specific people have that keeps them awake at 3am?**
 
-## Tech Stack (Draft)
-Bahasa dan tools utama yang direncanakan.
+Not "users want better experience." That's meaningless. Try: "Small business owners lose $2,000/month because they can't track inventory across 3 locations and discover shortages only when customers complain."
 
-## Expected Output
-Hasil akhir yang diharapkan (fitur atau sistem berjalan).
+## Who Gives a Damn
+**Who has this problem RIGHT NOW and would pay money to solve it?**
 
-### Contoh Nyata Output AI
+Be brutally specific:
+- Demographics that matter
+- Context where pain occurs  
+- How they currently fail to solve it
+- Why they haven't found alternatives
 
-#### Sample Kode
-```python
-# Contoh fungsi utama yang dihasilkan AI
-def greet(name: str) -> str:
-    """Menyapa user dengan nama tertentu."""
-    return f"Hello, {name}!"
-```
+## Your Approach
+**What's the simplest thing that could possibly work?**
 
-#### Sample Log
-```
-[2025-11-01 10:00:00] [INFO] Proyek berhasil diinisialisasi.
-[2025-11-01 10:00:01] [SUCCESS] Fungsi greet dieksekusi dengan input: 'Alice'
-[2025-11-01 10:00:01] [OUTPUT] Hello, Alice!
-```
+Not your grand vision. Not the platform you'll build eventually. The MVP that proves people will actually use this.
 
-#### Sample Output AI
-```
-Hello, Alice!
-```
+## Success = Money/Usage/Survival
+**How do you know you haven't built something nobody wants?**
 
-## Terms and Conditions (Ringkasan)
-- Proyek ini tunduk pada aturan anti-kecurangan, anti-penipuan, dan anti-penuduhan palsu.
-- Detail lengkap terkait risiko, audit, dan penegakan aturan dapat dilihat di dokumen risk audit.
+Define metrics that matter:
+- Revenue (if applicable)
+- Active usage (not signups)
+- User retention (not acquisition)
+- Problems actually solved (not features shipped)
+
+## Technology Constraints
+**What are you actually building this with and why?**
+
+List real constraints:
+- Team skills
+- Time limits
+- Budget reality
+- Integration requirements
+
+---
+
+**Warning**: If you can't fill this out specifically, you're not ready to build anything. Go talk to real people with real problems first.

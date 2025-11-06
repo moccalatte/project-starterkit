@@ -1,157 +1,94 @@
-# DEV PROTOCOL v3.5
+# Development Protocol: Craft & Ship
 
-**Tujuan:** Panduan AI-first untuk developer solo yang sepenuhnya mengandalkan AI coder. Semua instruksi, perubahan, dan dokumentasi dilakukan lewat prompt dan output AI, agar hasil stabil, efisien, dan mudah diaudit.
+## Core Philosophy
+Build systems that **solve real problems** while **protecting real assets**. Every line of code should either create value or prevent catastrophic failure.
 
----
+## The 3 Fatal Gates
 
-## ⚠️ Warning!
+Before production, these 3 areas will kill your business if wrong:
 
-- Jangan pernah ubah isi file dev_protocol ini.
-- Jika terjadi konflik antar aturan, AI harus memprioritaskan **aturan yang lebih spesifik terhadap tugas aktif**.
-- AI boleh melakukan improvisasi atau adaptasi jika solusi standar tidak efektif, asalkan tetap terdokumentasi dan tidak menimbulkan konflik besar.
+### 1. **Fraud & Financial Integrity**
+- **Authentication**: Who is this user? (Never trust, always verify)
+- **Authorization**: What can they do? (Principle of least privilege)
+- **Audit Trail**: Immutable log of WHO did WHAT, WHEN, and FROM WHERE
+- **Data Integrity**: Financial/critical data ACID compliance
 
----
+### 2. **Security & Privacy**
+- **Input Validation**: Assume all input is malicious until proven otherwise
+- **Encryption**: Sensitive data encrypted at rest and in transit (AES-256 minimum)
+- **Error Handling**: Fail securely - never leak system internals
+- **Access Controls**: Zero-trust architecture with time-limited tokens
 
-## 🧩 Lingkungan
+### 3. **Operational Resilience**
+- **Database Integrity**: ACID transactions, backup/restore tested, migration scripts
+- **Monitoring**: Real-time alerts for system health and security events
+- **Logging**: Structured logs for debugging (JSON format, correlation IDs)
+- **Recovery**: Tested disaster recovery and rollback procedures
 
-- Cantumkan bahasa & versi terbaru atau paling stabil.
-- Semua dependency wajib dijelaskan (nama + versi). Sertakan file `requirements.txt`, `package.json`, atau lockfile bila relevan.
-- Cara run harus jelas (contoh: `./run.sh` atau `python main.py`).
-- **Untuk proyek Python, wajib menggunakan virtual environment** (`venv`, `poetry`, atau sejenisnya) agar dependency terisolasi.
-- Semua error harus ditangani dengan log yang jelas — **tidak boleh** `pass` tanpa pesan.
-- Setiap perubahan penting harus didokumentasikan dengan contoh nyata (kode, log, output) di folder `/logs/` atau di file terkait.
-- Dilarang menambahkan dependensi eksternal besar tanpa izin (framework/cloud berat).
-- **Selalu sertakan `.gitignore`** berisi daftar file yang tidak relevan atau berisiko jika diunggah ke repositori publik, seperti:
+## The Production Gates
 
-  ```
-  __pycache__/
-  *.log
-  .env
-  /venv/
-  /node_modules/
-  /dist/
-  /build/
-  *.sqlite
-  *.db
-  *.pem
-  .DS_Store
-  ```
+### Gate 1: Security Review
+- [ ] Authentication/authorization tested with edge cases
+- [ ] All user inputs validated and sanitized
+- [ ] Error messages reveal no system information
+- [ ] Audit logs capture compliance requirements
 
-- AI wajib menyesuaikan isi `.gitignore` sesuai bahasa dan struktur proyek.
+### Gate 2: Failure Testing
+- [ ] System fails gracefully under load
+- [ ] Data corruption scenarios tested
+- [ ] Recovery procedures validated
+- [ ] Monitoring alerts trigger correctly
 
----
+### Gate 3: Business Validation
+- [ ] Solves the actual user problem
+- [ ] Meets compliance requirements
+- [ ] Performance acceptable under real load
+- [ ] Can be supported in production
 
-## 🪶 Observability (Lightweight)
+## AI Development Principles
+- **State the real problem** - not your solution bias
+- **Ask for threat analysis** - what could go wrong?
+- **Demand working examples** - not theoretical code
+- **Test edge cases** - AI is optimistic, reality isn't
 
-- Setiap proyek wajib memiliki **observability dasar:** logging, runtime metrics ringan, dan monitoring sederhana tanpa beban eksternal berat.
-- Logging wajib aktif di semua mode (dev, test, production).
-- Gunakan sistem logging **lightweight**, tidak bergantung pada service eksternal.
-- Semua log disimpan di folder `/logs/` dengan struktur:
-  ```
-  /logs/{service}/{date}.log
-  ```
-- Runtime dan background process **harus menulis log real-time** (streaming ke file).
-- Gunakan format log konsisten: `[timestamp] [level] message`.
-- Tambahkan snapshot runtime metrics ringan (CPU, RAM, uptime, loop status) bila memungkinkan.
-- Error fatal → log, lalu exit dengan kode 1.
-- Hindari loop tanpa delay — wajib ada `sleep()` atau mekanisme backoff.
-- Prioritaskan logging daripada GUI untuk debugging dan audit.
-- Audit proyek harus bisa dilakukan **hanya lewat isi folder `/logs/`** tanpa akses IDE.
-- AI wajib menyimpan minimal satu contoh log hasil eksekusi (success & error) setiap kali melakukan perubahan.
+## Emergency Procedures
 
----
+### Security Breach
+1. **Isolate immediately** - network, users, data
+2. **Preserve evidence** - logs, traffic, state
+3. **Assess impact** - what data/money is at risk?
+4. **Communicate** - internal team, external if legally required
 
-## 🧱 Struktur Kode
+### System Failure
+1. **Rollback if possible** - previous known good state
+2. **Activate backup systems** - manual procedures if needed
+3. **Preserve logs** - for post-mortem analysis
+4. **Track financial impact** - revenue, costs, liability
 
-- Terapkan sistem **modular & clean structure**: pisahkan fungsi ke modul/folder sesuai tanggung jawab (misal `core/`, `utils/`, `services/`, `api/`, dll).
-- Tujuan penerapan sistem modular: agar proyek mudah dimaintain, dan fitur dapat ditambah atau dihapus **tanpa menimbulkan error atau konflik besar**.
-- Bila modularisasi penuh tidak memungkinkan, gunakan **best practice terdekat** agar kode tetap mudah dibaca dan dirawat.
-- File tidak lebih dari **300–400 baris** setelah fitur stabil.
-- Setiap file/fungsi hanya punya satu tanggung jawab (single responsibility).
-- Gunakan folder standar:
-  - `src/`    → kode utama
-  - `logs/`   → semua log
-  - `tests/`  → uji sederhana (opsional)
-- Semua fungsi publik harus punya docstring singkat (tujuan, argumen, return).
-- Sertakan contoh kode dan output untuk setiap fungsi utama di dokumentasi atau README.
-- Hindari refactor besar tanpa permintaan eksplisit.
+## The Compliance Reality Check
 
----
+Every feature must answer:
+- **Audit Question**: Can we prove this happened and why?
+- **Fraud Question**: How could someone steal money/data here?
+- **Debug Question**: When this breaks at 3am, can we fix it?
+- **Legal Question**: Are we liable if this goes wrong?
 
-## 🧩 Gaya Perubahan
+## Anti-Patterns That Kill Companies
 
-- **Perubahan minimal:** patch kecil, bukan rewrite massal.
-- Sertakan langkah verifikasi (cara cek fix berhasil).
-- Setelah patch diterapkan, jalankan minimal **1 contoh input/output** untuk bukti hasil.
-- Sertakan rollback plan (cara balik ke versi sebelum patch).
-- Dokumentasikan contoh input/output sebelum dan sesudah patch, serta langkah rollback jika diperlukan.
+❌ **Logging everything** - creates noise, misses signals
+✅ **Log business events** - payments, access, changes
 
----
+❌ **Complex security theater** - easy to bypass, hard to maintain  
+✅ **Simple, tested controls** - authentication, authorization, audit
 
-## 🧰 Protokol Debug
+❌ **Perfect error handling** - over-engineered recovery
+✅ **Graceful degradation** - fail safe, recover fast
 
-1. Ulangi error dengan jelas.
-2. Catat environment (`php -v`, `python --version`, dll).
-3. Lampirkan log/error singkat (10–20 baris).
-4. Ajukan 2–3 hipotesis penyebab.
-5. Terapkan patch kecil, bukan rewrite besar.
-6. Verifikasi hasil lalu dokumentasikan di log.
-7. Sertakan contoh nyata (log, output, kode) dari hasil debug di folder `/logs/` atau file terkait.
+❌ **Compliance checklists** - box-ticking without understanding
+✅ **Risk-based controls** - protect what actually matters
 
 ---
 
-## 🤖 AI Interaction
+**Remember**: You're not building software. You're building a business that software enables. Every technical decision should serve business survival and growth.
 
-- Jika tidak yakin, AI wajib jelaskan **2–3 hipotesis**.
-- Fokus jelaskan **kenapa error terjadi** sebelum kasih solusi.
-- Dilarang rename/pindah file kecuali diminta.
-- Semua hasil eksekusi atau perubahan harus muncul di log (termasuk runtime/background).
-- Setiap perubahan, patch, atau fitur baru wajib didokumentasikan dengan contoh nyata (kode, log, output) di file terkait atau folder `/logs/`.
-- Jika **aturan dalam file ini tidak sepenuhnya bisa diterapkan**, AI wajib:
-  1. Menerapkan **best practice terdekat yang tidak menimbulkan konflik atau masalah.**
-  2. Menyampaikan hal tersebut secara eksplisit di **akhir jawaban.**
-- AI juga wajib membuat file **README.md** yang jelas dan **beginner-friendly**, berisi:
-  - Penjelasan struktur dan fungsi utama.
-  - Panduan setup langkah demi langkah.
-  - Petunjuk testing dan jalankan produksi.
-  - Penanda mana yang **wajib**, **opsional**, dan **rekomendasi**.
-  - Contoh nyata (kode, log, output) dari fitur utama dan hasil eksekusi.
-
----
-
-## ✍️ Output Policy
-
-- Jawaban harus padat, langsung ke eksekusi, dan tidak bertele-tele.
-- Hindari penjelasan teori umum, narasi panjang, atau paragraf tidak relevan kecuali diminta eksplisit.
-- Gunakan format langkah atau blok kode, bukan cerita deskriptif.
-- Sertakan minimal satu contoh kode, log, atau output setiap kali menjawab atau melakukan perubahan.
-
----
-
-## ⏹️ Stop Signal
-
-- Akhiri jawaban dengan `✅ Done` setelah semua langkah selesai.
-- Jangan menambahkan penutup lain, komentar reflektif, atau saran tambahan di luar konteks tugas.
-
----
-
-## 🔒 Security
-
-- Jangan pernah commit credential, password, API key, atau data sensitif ke repo.
-- Gunakan file `.env` untuk variabel rahasia dan pastikan sudah masuk `.gitignore`.
-- Selalu validasi input dari user/external sebelum diproses.
-- Hindari hardcode data sensitif di source code.
-- Untuk akses eksternal (API, DB, dsb), gunakan mekanisme autentikasi yang aman dan minimal.
-- Jika ada file konfigurasi sensitif, pastikan hanya tersedia di environment lokal/secure.
-
----
-
-## ✅ Checklist untuk AI
-
-- [ ] Sudah logging?
-- [ ] Sudah modular?
-- [ ] Sudah ada README dan sudah sesuai perkembangan proyek ini?
-- [ ] Sudah mendokumentasikan contoh nyata (kode, log, output) di setiap perubahan?
-- [ ] Sudah ada rollback plan?
-- [ ] Sudah output `✅ Done`?
-- [ ] Sudah cek keamanan data/credential?
+✅ Done

@@ -1,149 +1,160 @@
-# Architecture Plan
+# System Architecture
 
-## System Overview
-Struktur sistem dan alur komunikasi antar komponen.
+**Design for failure. Everything else is wishful thinking.**
 
----
+## Core Architectural Decision
+**Monolith first.** Don't build microservices until monolith pain justifies the complexity cost.
 
-## Business Process
+## Failure-First Design
 
-Alur utama proses bisnis aplikasi ini:
+### What Kills Businesses
+1. **Data Loss**: User data disappears or corrupts
+2. **Security Breach**: Unauthorized access to sensitive information  
+3. **System Unavailability**: Users can't access core functionality
+4. **Performance Collapse**: System becomes unusably slow
 
-1. User melakukan registrasi.
-2. Sistem melakukan verifikasi email.
-3. User login dan mengakses fitur utama.
-4. User melakukan transaksi.
-5. Sistem mencatat transaksi dan mengirim notifikasi.
-6. Admin dapat melihat laporan transaksi.
-
-### Sample Flowchart
-```mermaid
-flowchart TD
-    Register --> VerifyEmail --> Login --> Transaksi --> Notifikasi --> Laporan
+### Defensive Architecture
+```
+Request → Input Validation → Authentication → Authorization → Business Logic → Database → Audit Log → Response
 ```
 
-### Sample Overview
-Sistem terdiri dari beberapa modul utama: API, Core Logic, Service Layer, dan Logging. Data dari user masuk ke API, diproses oleh Core Logic, diteruskan ke Service Layer, dan hasilnya dicatat di Logging.
+Each layer prevents specific failure modes.
 
-## Visual Diagram (Sample)
-```mermaid
-flowchart TD
-    User -->|Request| API
-    API -->|Parse| CoreLogic
-    CoreLogic -->|Process| ServiceLayer
-    ServiceLayer -->|Result| Logging
-    Logging -->|Audit| Admin
-```
-*Diagram di atas adalah contoh alur data dari user ke sistem dan logging.*
+## Essential Components
 
-
-
-## Modules
-Daftar modul utama + tanggung jawabnya.
-
-### Sample Modules
-- **API Module**
-  Menangani request dari user, validasi input, dan routing ke core logic.
-  ```python
-  # api_module.py
-  def handle_request(request):
-      # Validasi dan parsing
-      data = parse_request(request)
-      result = process_core(data)
-      return result
-  ```
-- **Core Logic**
-  Memproses data, menjalankan algoritma utama, dan mengatur workflow.
-  ```python
-  # core_logic.py
-  def process_core(data):
-      # Proses utama
-      output = run_algorithm(data)
-      return output
-  ```
-- **Service Layer**
-  Integrasi dengan service eksternal (misal: database, API lain).
-  ```python
-  # service_layer.py
-  def save_to_db(output):
-      # Simpan hasil ke database
-      db.insert(output)
-  ```
-- **Logging**
-  Mencatat semua aktivitas dan error ke folder `/logs/`.
-  ```python
-  # logging_util.py
-  def log_event(event):
-      with open("logs/service/2025-11-XX.log", "a") as f:
-          f.write(f"[timestamp] [INFO] {event}\n")
-  ```
-
-
-## Data Flow
-Bagaimana data bergerak antar modul.
-
----
-
-## Database Schema
-
-Dokumentasikan struktur tabel utama yang berlaku untuk banyak jenis proyek (user, transaksi, dsb).
-
-### Contoh Minimal Schema
-
-- Tabel: users (id, username, email, password_hash, created_at)
-- Tabel: transactions (id, user_id, amount, date, status)
-
-### Sample DDL
+### Database Layer
+**Assumption**: PostgreSQL until proven otherwise.
 
 ```sql
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(50) NOT NULL,
-  email VARCHAR(100) NOT NULL,
-  password_hash TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Core Business Entity (replace with your domain)
+users (id, email, password_hash, created_at, verified_at)
+sessions (token, user_id, expires_at, ip_address)
+audit_logs (id, user_id, action, details, created_at, ip_address)
 
-CREATE TABLE transactions (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  amount NUMERIC(12,2) NOT NULL,
-  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  status VARCHAR(20) NOT NULL
-);
+-- Your Domain Entity
+[entity_name] (
+  id, 
+  [critical_business_fields],
+  created_at, 
+  updated_at,
+  created_by
+)
 ```
 
-### Sample Data Flow
-1. User mengirim request ke API.
-2. API melakukan validasi dan parsing.
-3. Data diteruskan ke Core Logic untuk diproses.
-4. Hasil proses dikirim ke Service Layer untuk disimpan atau diteruskan ke eksternal.
-5. Semua aktivitas dicatat di modul Logging.
+**Why These Tables**: Users prove identity, sessions manage access, audit logs enable debugging/compliance, domain entity solves your specific problem.
 
-#### Sample Log Output
+### Application Layer
+- **Auth Service**: Who is this? What can they do?
+- **Core Business Service**: Your actual value proposition
+- **Audit Service**: Immutable logging for debugging/compliance
+- **API Gateway**: Input validation, rate limiting, error handling
+
+### Infrastructure Layer
+- **Database**: Primary data store with automated backups
+- **Cache**: Redis for sessions and frequently accessed data
+- **Monitoring**: Application health, error rates, performance metrics
+- **Logs**: Structured logging for debugging and compliance
+
+## Data Flow
+
+### Write Operations
 ```
-[2025-11-XX 10:00:00] [INFO] Request received from user_id=123
-[2025-11-XX 10:00:01] [INFO] Data processed successfully
-[2025-11-XX 10:00:02] [ERROR] Failed to save to database: ConnectionTimeout
-```
-
-
-## Dependencies
-Library eksternal atau API pihak ketiga.
-
-## Security Considerations
-Pastikan arsitektur mendukung keamanan data dan anti-manipulasi.
-- Setiap modul harus memvalidasi input dan output.
-- Hindari single point of failure untuk data sensitif.
-- Gunakan enkripsi untuk komunikasi antar modul jika diperlukan.
-- Dokumentasikan dependensi eksternal yang berpotensi risiko.
-
-## Folder Structure
+User Input → Validation → Authentication → Authorization → Transaction Begin → 
+Business Logic → Database Write → Audit Log → Transaction Commit → Response
 ```
 
-src/
-┣ core/
-┣ api/
-┣ services/
-┣ utils/
-┗ logs/
+**Failure Points**: Invalid input, expired session, insufficient permissions, database error, audit failure.
+
+### Read Operations
+```
+User Request → Authentication → Authorization → Cache Check → Database Query → Response
+```
+
+**Optimization**: Cache frequently accessed data, but never cache sensitive information.
+
+## Security Architecture
+
+### Defense in Depth
+1. **Input Validation**: Assume all input is malicious
+2. **Authentication**: Verify user identity with secure tokens
+3. **Authorization**: Check permissions for every operation
+4. **Data Protection**: Encrypt sensitive data at rest and in transit
+5. **Audit Logging**: Record who did what, when, from where
+
+### Threat Mitigation
+- **SQL Injection**: Parameterized queries only
+- **XSS**: Output encoding, Content Security Policy
+- **CSRF**: Same-origin validation, CSRF tokens
+- **Session Hijacking**: Secure tokens, HTTPS only
+- **Privilege Escalation**: Principle of least privilege
+
+## Deployment Strategy
+
+### Development
+```
+Docker Compose: App + Database + Redis
+```
+
+### Staging
+```
+Single server: App container + Managed database + Redis
+```
+
+### Production
+```
+Load Balancer → App Servers → Managed Database + Redis Cluster
+```
+
+**Scaling Plan**: Scale vertically first (bigger servers), then horizontally (more servers).
+
+## Monitoring & Observability
+
+### Critical Metrics
+- **Availability**: Uptime percentage
+- **Performance**: Response time percentiles
+- **Errors**: Error rate and types
+- **Business**: Core user actions completion rate
+
+### Alerting
+- **P0** (Immediate): System down, data corruption
+- **P1** (1 hour): High error rate, performance degradation  
+- **P2** (24 hours): Non-critical errors, capacity concerns
+
+### Logging Strategy
+```json
+{
+  "timestamp": "2024-01-15T10:30:00Z",
+  "level": "info",
+  "service": "auth",
+  "user_id": "12345",
+  "action": "login",
+  "ip_address": "192.168.1.1",
+  "user_agent": "Mozilla/5.0...",
+  "result": "success"
+}
+```
+
+**Why Structured**: Enables searching, filtering, and automated analysis.
+
+## Technology Decisions
+
+### Language/Framework
+**Choice**: [Your choice based on team skills]
+**Why**: Team expertise trumps theoretical performance
+
+### Database
+**Choice**: PostgreSQL
+**Why**: ACID compliance, mature ecosystem, handles most use cases
+
+### Deployment
+**Choice**: Docker + [Cloud Provider]
+**Why**: Consistency across environments, managed services reduce operational burden
+
+### External Services
+- **Email**: [Service] for transactional emails
+- **Payments**: [Service] for payment processing (if applicable)
+- **Monitoring**: [Service] for application monitoring
+
+---
+
+**Remember**: The best architecture is the one you can actually build, deploy, and maintain with your current team and constraints.

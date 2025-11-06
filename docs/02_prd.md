@@ -1,44 +1,60 @@
-# Product Requirements Document (PRD)
+# Product Requirements
 
-## Summary
-Tujuan utama dan cakupan proyek.
+**If you can't explain why someone would pay for this, stop building it.**
 
-## User Stories
-1. Sebagai admin, saya ingin bisa login agar dapat mengelola data user.
-2. Sebagai user, saya ingin mendaftar akun agar bisa mengakses fitur aplikasi.
-3. Sebagai user, saya ingin melihat riwayat transaksi agar bisa memantau aktivitas saya.
+## Core Value Proposition
+**What do users get that they can't get anywhere else?**
 
-### Contoh User Story Output (AI)
-```json
-{
-  "role": "admin",
-  "action": "login",
-  "result": "akses dashboard admin"
-}
-```
+One sentence. No buzzwords. No "synergistic solutions." Just value.
 
-## Functional Requirements
-Daftar fitur utama dan behavior.
+## Critical User Journey
+**The ONE flow that must work perfectly or your business dies.**
 
-## Non-functional Requirements
-Kinerja, keamanan, reliabilitas, dan batasan sistem.
+### Primary Flow:
+1. User arrives with [specific problem]
+2. System delivers [specific solution] 
+3. User achieves [specific measurable outcome]
+4. User [pays/returns/recommends] because [specific value]
 
-## Acceptance Criteria
-- Admin dapat login dengan username dan password valid.
-- User dapat mendaftar akun baru dan menerima email konfirmasi.
-- User dapat melihat daftar transaksi miliknya di halaman profil.
+**Success Metric**: [Specific number] users complete this flow within [timeframe]
 
-### Contoh Output Acceptance (AI)
-```json
-{
-  "login_success": true,
-  "register_success": true,
-  "transactions": [
-    {"id": 1, "amount": 10000, "date": "2025-11-01"},
-    {"id": 2, "amount": 5000, "date": "2025-11-02"}
-  ]
-}
-```
+## Non-Negotiable Requirements
 
-## Compliance
-Semua fitur wajib mematuhi protokol anti-kecurangan dan keamanan sesuai dokumen risk & audit serta security policy.
+### Business Critical
+- **Data Integrity**: [Specific data] must never be lost/corrupted
+- **Security**: [Specific assets] protected from [specific threats]
+- **Performance**: [Critical actions] complete in under [specific time]
+- **Compliance**: [Specific regulations] for [specific data/money]
+
+### User Experience
+- **Core Flow**: Works on [specific devices/browsers]
+- **Error Handling**: Users understand what went wrong and how to fix it
+- **Recovery**: Users can undo/retry critical actions
+
+## What We're NOT Building
+
+List features that seem related but don't serve the core value:
+- [Feature that sounds good but doesn't solve core problem]
+- [Complex feature that can wait for v2]
+- [Nice-to-have that doesn't drive user behavior]
+
+**Why This Matters**: Saying no to good ideas enables yes to great execution.
+
+## Launch Criteria
+**When is this ready for real users?**
+
+- [ ] Core flow works end-to-end
+- [ ] Users can recover from common mistakes
+- [ ] System survives peak expected load
+- [ ] Business-critical data is protected
+- [ ] You can support users when things break
+
+## Metrics That Matter
+**How do you know this is working?**
+
+- **Usage**: [Specific user actions] per [timeframe]
+- **Value**: [Business metric] improvement after [timeframe]
+- **Adoption**: [Percentage] of target users complete core flow
+- **Retention**: [Percentage] return after [timeframe]
+
+**Anti-Metrics**: Vanity metrics that feel good but don't indicate success

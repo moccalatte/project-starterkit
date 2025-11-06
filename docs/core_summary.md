@@ -1,7 +1,8 @@
 project-starterkit/docs/core_summary.md
-# 📝 Core Summary (Ringkasan Inti Proyek)
+# Project Status
 
-Dokumen ini berfungsi sebagai ringkasan cepat seluruh proyek untuk referensi tim, AI builder, atau reviewer. Isi dengan informasi paling penting dan terbaru agar proses development, audit, dan onboarding lebih efisien.
+## Current Reality
+**Document what's actually happening, not what you wish was happening.**
 
 ---
 
