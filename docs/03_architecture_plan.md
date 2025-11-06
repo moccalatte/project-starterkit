@@ -90,22 +90,66 @@ User Request → Authentication → Authorization → Cache Check → Database Q
 
 ## Deployment Strategy
 
-### Development
-```
-Docker Compose: App + Database + Redis
+### Development Environment
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  app:
+    build: .
+    ports: ["3000:3000"]
+    environment: [".env"]
+    depends_on: ["db", "redis"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  
+  db:
+    image: postgres:15-alpine
+    environment: ["POSTGRES_DB=app", "POSTGRES_USER=app"]
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes: ["redis_data:/data"]
 ```
 
-### Staging
-```
-Single server: App container + Managed database + Redis
+### Container Optimization
+```dockerfile
+# Multi-stage build for minimal production image
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+
+FROM node:18-alpine AS runtime
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
+WORKDIR /app
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --chown=nextjs:nodejs . .
+USER nextjs
+EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
+CMD ["npm", "start"]
 ```
 
-### Production
+### Production Deployment
 ```
-Load Balancer → App Servers → Managed Database + Redis Cluster
+Load Balancer → Docker Containers → Managed Database + Redis
 ```
 
-**Scaling Plan**: Scale vertically first (bigger servers), then horizontally (more servers).
+**Container Requirements**:
+- Images < 500MB (use Alpine Linux base)
+- Health checks for all services
+- Resource limits (CPU/memory)
+- Non-root user execution
+- Security scanning before deployment
+
+**Scaling Strategy**: Horizontal scaling with container orchestration.
 
 ## Monitoring & Observability
 

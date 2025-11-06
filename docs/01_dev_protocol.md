@@ -21,6 +21,7 @@ Before production, these 3 areas will kill your business if wrong:
 
 ### 3. **Operational Resilience**
 - **Database Integrity**: ACID transactions, backup/restore tested, migration scripts
+- **Containerization**: Docker with optimized images, health checks, resource limits
 - **Monitoring**: Real-time alerts for system health and security events
 - **Logging**: Structured logs for debugging (JSON format, correlation IDs)
 - **Recovery**: Tested disaster recovery and rollback procedures
@@ -44,6 +45,7 @@ Before production, these 3 areas will kill your business if wrong:
 - [ ] Meets compliance requirements
 - [ ] Performance acceptable under real load
 - [ ] Can be supported in production
+- [ ] Dockerized with optimized images and health checks
 
 ## AI Development Principles
 - **State the real problem** - not your solution bias

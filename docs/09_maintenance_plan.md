@@ -6,16 +6,23 @@
 
 ### Morning Health Check (5 minutes)
 **System Status Dashboard Review**:
-- [ ] Application servers responding normally
+- [ ] Application containers healthy and responding
 - [ ] Database performance within normal ranges
+- [ ] Container resource usage normal (CPU < 80%, Memory < 80%)
 - [ ] Error rates below threshold (< 1% for critical operations)
 - [ ] Overnight backup completion verified
 
-**Key Metrics to Check**:
+**Container Health Metrics**:
+- All containers passing health checks
+- Image vulnerabilities: Zero critical, < 5 high severity
+- Container restart count: < 3 in 24 hours
+- Resource limits: CPU/Memory usage within bounds
+
+**Infrastructure Metrics**:
 - Response time: < 2 seconds for user-facing operations
 - Error rate: < 1% for critical user flows
 - Database connections: < 80% of pool capacity
-- Disk space: < 80% full on all servers
+- Disk space: < 80% full on all volumes
 
 **If anything is red**: Follow escalation procedures immediately.
 
@@ -27,13 +34,21 @@
 
 ---
 
-## Weekly Maintenance
+### Weekly Maintenance
 
-### Security and Updates (30 minutes)
+### Container and Security Updates (45 minutes)
+- [ ] Scan container images for vulnerabilities
+- [ ] Update base images (Alpine, Node, etc.) to latest secure versions
+- [ ] Rebuild and test application images
 - [ ] Review security logs for suspicious activity
-- [ ] Check for critical security updates to dependencies
-- [ ] Update non-breaking dependencies
-- [ ] Scan application for known vulnerabilities
+- [ ] Update application dependencies (security patches only)
+- [ ] Rotate container registry credentials
+
+### Container Optimization Review (15 minutes)
+- [ ] Check container image sizes (target < 500MB)
+- [ ] Review resource usage patterns and adjust limits
+- [ ] Clean up unused images and containers
+- [ ] Verify health check effectiveness
 
 ### Performance Review (15 minutes)
 - [ ] Review slow query log for database optimization opportunities

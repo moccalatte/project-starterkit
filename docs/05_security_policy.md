@@ -197,9 +197,10 @@ except Exception as e:
 - **Security code review**: Manual review of sensitive code
 
 ### Infrastructure Security
-- **Network security**: Firewall rules, network segmentation
-- **Server hardening**: Remove unnecessary services, apply patches
-- **Access control**: Principle of least privilege for system access
+- **Container Security**: Non-root users, minimal base images, vulnerability scanning
+- **Network Security**: Firewall rules, network segmentation, service mesh
+- **Image Security**: Signed images, registry scanning, minimal attack surface
+- **Runtime Security**: Read-only filesystems, resource constraints, capability dropping
 
 ---
 

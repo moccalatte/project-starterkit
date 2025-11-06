@@ -126,10 +126,12 @@ except PaymentProcessingError as e:
 - **File uploads**: Progress indication for > 1MB files
 
 ### System Requirements
-- **Memory usage**: No memory leaks in long-running processes
-- **Database connections**: Proper connection pooling and cleanup
-- **Background jobs**: Complete within business requirements
-- **Log file sizes**: Automatic rotation and cleanup
+- **Container Efficiency**: Images < 500MB, startup time < 30 seconds
+- **Resource Management**: CPU/Memory limits enforced, no container restarts
+- **Health Monitoring**: All services pass health checks consistently
+- **Memory Usage**: No memory leaks in long-running processes
+- **Database Connections**: Proper connection pooling and cleanup
+- **Background Jobs**: Complete within business requirements
 
 ### Optimization Strategy
 1. **Measure first**: Don't optimize without data
@@ -140,7 +142,14 @@ except PaymentProcessingError as e:
 
 ---
 
-## Security Quality Gates
+### Security Quality Gates
+
+### Container Security
+- [ ] Application runs as non-root user
+- [ ] Base images scanned for vulnerabilities (zero critical)
+- [ ] Container resources limited (CPU/memory)
+- [ ] Read-only filesystem where possible
+- [ ] Minimal packages installed (Alpine base preferred)
 
 ### Input Validation
 - [ ] All user inputs validated for type, length, format

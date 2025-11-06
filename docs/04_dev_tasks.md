@@ -37,10 +37,11 @@ If you can't demo this to a real user by end of week 1, your scope is too big.
 - [ ] Audit logging for compliance
 
 ### Operations Gate
+- [ ] Dockerized with optimized images (<500MB)
+- [ ] Health checks and resource limits configured
 - [ ] Basic monitoring and alerting
 - [ ] Structured logging for debugging
 - [ ] Rollback procedures tested
-- [ ] Performance monitoring for bottlenecks
 
 ### Success Criteria
 - System survives malicious input
