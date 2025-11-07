@@ -1,144 +1,58 @@
 # AI-First Development Kit
 
-**Ship software that won't kill your business.**
+**Ship software that won't kill your business. For solo developers using AI.**
 
-Build production-ready software with AI. Focus on solving real problems, not creating documentation theater.
+## 🎯 What You Get
 
----
+**3 Core Files**:
+- **[00_context.md](docs/00_context.md)** — Define your problem (5 min)
+- **[01_dev_protocol.md](docs/01_dev_protocol.md)** — Safety rules (prevent business death)
+- **[02_prd.md](docs/02_prd.md)** — Build plan
 
-
-## What You Get
-
-**Essential Templates**:
-- [00_context.md](docs/00_context.md) — Define the real problem you're solving
-- [01_dev_protocol.md](docs/01_dev_protocol.md) — 3 fatal gates to prevent business death
-- [02_prd.md](docs/02_prd.md) — Requirements that matter, not wishlist features
-- [03_architecture_plan.md](docs/03_architecture_plan.md) — Systems that survive failure
-- [04_dev_tasks.md](docs/04_dev_tasks.md) — Sprint-based delivery, not endless planning
-- [05_security_policy.md](docs/05_security_policy.md) — Threat-based security, not theater
-- [06_risk_audit.md](docs/06_risk_audit.md) — Business-killing risks, not imaginary ones
-- [07_quality_review.md](docs/07_quality_review.md) — Definition of done that ships
-- [08_release_notes.md](docs/08_release_notes.md) — Changes that matter to users
-- [09_maintenance_plan.md](docs/09_maintenance_plan.md) — Operations that work at 3am
-- [agents.md](docs/agents.md) — AI problem-solving, not bureaucracy
-
-## How to Use This Kit
-
-### Quick Start
-1. **Copy these templates** to your new project directory
-2. **Fill out the context** - Define the real problem you're solving
-3. **Use the AI prompts** - Problem-focused development instead of template filling
-4. **Ship working software** - Focus on solving user problems, not perfect documentation
-
-### Template Purpose
-Each template helps you avoid common startup failures:
-
-| Template | Prevents |
-|----------|----------|
-| Context | Building something nobody wants |
-| PRD | Feature creep and scope bloat |  
-| Architecture | Technical debt and system failures |
-| Dev Tasks | Analysis paralysis and missed deadlines |
-| Security | Data breaches and regulatory violations |
-| Risk Audit | Business-killing blind spots |
-| Quality | Production disasters and user abandonment |
-| Release Notes | User confusion and poor communication |
-| Operations | 3am emergencies and system failures |
-| Agents | AI bureaucracy and ineffective collaboration |
+**Reference Library** (use when needed):
+- [03_error_fix_guide.md](docs/03_error_fix_guide.md) — Bug fixing
+- [04_deployment.md](docs/04_deployment.md) — Deploy safely
+- [05_anti_fraud.md](docs/05_anti_fraud.md) — Prevent abuse
+- [06_bot_security.md](docs/06_bot_security.md) — Bot security
+- [07_payment_security.md](docs/07_payment_security.md) — Payment handling
+- [08_ai_collaboration.md](docs/08_ai_collaboration.md) — AI best practices
+- [09_free_alternatives.md](docs/09_free_alternatives.md) — $5/month services
+- [10_disaster_recovery.md](docs/10_disaster_recovery.md) — VPS suspension recovery
 
 ---
 
-## AI-First Development Process
+## ⚡ Two Ways to Ship
 
-**Step 1 – Problem Definition**
-```
-I need to solve [SPECIFIC PROBLEM] for [SPECIFIC USERS] who currently [SPECIFIC PAIN POINT]. 
-Build me the simplest solution that delivers [SPECIFIC OUTCOME] with these constraints: [REAL CONSTRAINTS].
-Focus on working code first, documentation second.
-```
+### Quick Ship Method (30 minutes)
+1. **Define problem** in [00_context.md](docs/00_context.md)
+2. **Copy exact prompt** from [COPY_PASTE_PROMPTS.md](COPY_PASTE_PROMPTS.md)
+3. **Run AI-generated setup script**  
+4. **Deploy and ship**
 
-**Step 2 – Risk Analysis**
-```
-What could kill this business? Focus on fraud, security breaches, and data loss. 
-Design defenses for the top 3 threats. Show me working security implementations.
-Reference `01_dev_protocol.md` for fatal gate requirements.
-```
-
-**Step 3 – Production Readiness**
-```
-Make this production-ready: database integrity, monitoring, rollback procedures. 
-Show me the disaster recovery plan that actually works.
-Test failure scenarios and document recovery steps.
-```
-
-**Step 4 – User Validation**
-```
-Test this with real users. What breaks? What's missing? What would make them pay?
-Build feedback loops and iterate based on actual usage, not assumptions.
-```
-
-**Step 5 – Scale Planning**
-```
-If this gets 10x users tomorrow, what breaks first? Fix the bottlenecks.
-Design for the load you'll actually have, not theoretical perfection.
-```
-
-## Philosophy
-
-### ultraThink Principles
-- **Think Different**: Question every assumption, start from first principles
-- **Craft, Don't Code**: Every solution should feel inevitable and elegant  
-- **Simplify Ruthlessly**: Remove complexity without losing power
-- **Ship Working Software**: Focus on solving real problems, not perfect engineering
-
-### Anti-Patterns This Kit Prevents
-❌ **Analysis Paralysis**: 13 documents before writing line 1 of code
-❌ **Template Worship**: Mistaking documentation for planning
-❌ **Security Theater**: Complex rules that don't prevent actual threats
-❌ **Bureaucratic AI**: Rigid workflows that slow down development
-
-✅ **Problem-First Development**: Start with user pain, end with working solutions
+### Proper Method (1-2 weeks)
+Follow templates 00 → 01 → 02, then build with AI assistance
 
 ---
 
-## Quick Start Template
+## 🛡️ Fatal Safety Checks
+- [ ] Secrets in .env (NOT in code)  
+- [ ] Rate limiting enabled
+- [ ] Input validation working
+- [ ] Payment webhooks secured (Indonesian gateways)
+- [ ] Health checks responding
 
-**Copy this prompt to start any new project:**
+**If any fail**: Check docs/01_dev_protocol.md
 
-```
-I need to solve [SPECIFIC PROBLEM] for [SPECIFIC USERS] who currently [PAIN POINT].
+## 💰 Solo Dev Stack: $5-15/month
+Cloudflare (FREE) + Supabase (FREE) + Railway ($5) + Midtrans (2.9%/transaction)
 
-Requirements:
-- Reference the AI-First Development Kit templates
-- Follow the 3 fatal gates: Security, Data Integrity, Operations  
-- Build working MVP that proves the concept
-- Focus on shipping value, not perfect engineering
+## 📞 When to Get Help
 
-Generate the essential project files and start building.
-```
-
----
-
-## Success Metrics
-
-### Project Health Indicators
-- **User Adoption**: Real users completing core workflows
-- **Business Value**: Measurable improvement in user outcomes
-- **System Reliability**: Uptime and error rates within acceptable ranges
-- **Team Velocity**: Consistent delivery of working features
-
-### Warning Signs
-- More time on documentation than user problems
-- Perfect engineering with no user validation
-- Complex processes that slow down shipping
-- Security rules that don't map to actual threats
+**AI handles**: Feature development, bug fixes, basic security, database design
+**Get expert help for**: GDPR compliance, 1M+ users, banking/healthcare, complex B2B
 
 ---
 
-## License
+**License**: MIT
 
-MIT License - Use this kit to build something that matters.
-
----
-
-**Ready to ship software that won't kill your business.**
+**Philosophy**: Ship working software fast without killing your business.

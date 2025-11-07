@@ -10,7 +10,10 @@ Before production, these 3 areas will kill your business if wrong:
 ### 1. **Fraud & Financial Integrity**
 - **Authentication**: Who is this user? (Never trust, always verify)
 - **Authorization**: What can they do? (Principle of least privilege)
-- **Audit Trail**: Immutable log of WHO did WHAT, WHEN, and FROM WHERE
+- **Payment Security**: If handling money, webhook verification + amount validation mandatory
+- **Rate Limiting**: Prevent automated attacks (100 req/min per IP, 1000/hour per user)
+- **Fraud Detection**: Monitor for suspicious patterns (velocity, geo, behavior)
+- **Audit Trail**: Immutable log of WHO did WHAT, WHEN, FROM WHERE
 - **Data Integrity**: Financial/critical data ACID compliance
 
 ### 2. **Security & Privacy**
@@ -28,11 +31,25 @@ Before production, these 3 areas will kill your business if wrong:
 
 ## The Production Gates
 
-### Gate 1: Security Review
-- [ ] Authentication/authorization tested with edge cases
-- [ ] All user inputs validated and sanitized
-- [ ] Error messages reveal no system information
-- [ ] Audit logs capture compliance requirements
+### Gate 1: Security Review (BLOCKING - NO EXCEPTIONS)
+
+#### For Bot Projects:
+- [ ] **Webhook verification**: Platform requests verified (Telegram/WhatsApp/Discord)
+- [ ] **Command authorization**: Admin commands restricted to authorized users
+- [ ] **Input validation**: User messages/commands sanitized and validated
+- [ ] **Rate limiting**: Bot commands limited (max per user per minute)
+- [ ] **Token security**: Bot tokens in environment variables, NEVER in code
+- [ ] **Error handling**: Bot doesn't crash on malformed input
+- [ ] **Audit logs**: User ID, command, timestamp, response logged
+
+#### For Web App Projects:
+- [ ] **Authentication bypass testing**: Try to access protected resources without login
+- [ ] **Authorization escalation testing**: Regular users cannot access admin functions
+- [ ] **Input validation**: SQL injection, XSS, command injection tests PASS
+- [ ] **Rate limiting**: API endpoints limited (100 req/min per IP minimum)
+- [ ] **Error handling**: Stack traces/DB errors never exposed to users
+- [ ] **Secret management**: NO hardcoded passwords, API keys, or tokens in code
+- [ ] **Audit logs**: WHO did WHAT, WHEN, FROM WHERE (tamper-proof)
 
 ### Gate 2: Failure Testing
 - [ ] System fails gracefully under load

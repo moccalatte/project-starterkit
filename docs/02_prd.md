@@ -1,60 +1,146 @@
-# Product Requirements
+# Build Plan
 
-**If you can't explain why someone would pay for this, stop building it.**
+**Everything you need to build and ship safely in 2 weeks.**
 
-## Core Value Proposition
-**What do users get that they can't get anywhere else?**
+## Core Feature (The ONE Thing)
+**What users actually need**: [Single most important feature]
 
-One sentence. No buzzwords. No "synergistic solutions." Just value.
+**User workflow**:
+1. User has [specific problem]
+2. They use your app to [specific action]
+3. They get [specific result]
+4. Success = [how you measure it works]
 
-## Critical User Journey
-**The ONE flow that must work perfectly or your business dies.**
+## Simple Architecture
 
-### Primary Flow:
-1. User arrives with [specific problem]
-2. System delivers [specific solution] 
-3. User achieves [specific measurable outcome]
-4. User [pays/returns/recommends] because [specific value]
+### Tech Stack (Keep It Simple)
 
-**Success Metric**: [Specific number] users complete this flow within [timeframe]
+#### For Bot Projects (Most Common)
+- **Bot Framework**: [Telegram Bot API/WhatsApp API/Discord.js]
+- **Backend**: [Node.js/Python for bot logic]
+- **Database**: [SQLite for simple bots, PostgreSQL for complex]
+- **Hosting**: [Railway/Render for always-on bots]
+- **Setup**: Automated with script (see docs/08_ai_collaboration.md)
 
-## Non-Negotiable Requirements
+#### For Web App Projects  
+- **Frontend**: [React/Next.js or simple HTML]
+- **Backend**: [Node.js/Python REST API]
+- **Database**: [PostgreSQL or SQLite]
+- **Hosting**: [Vercel/Netlify/Railway]
+- **Setup**: Automated with script (see docs/08_ai_collaboration.md)
 
-### Business Critical
-- **Data Integrity**: [Specific data] must never be lost/corrupted
-- **Security**: [Specific assets] protected from [specific threats]
-- **Performance**: [Critical actions] complete in under [specific time]
-- **Compliance**: [Specific regulations] for [specific data/money]
+### Architecture
 
-### User Experience
-- **Core Flow**: Works on [specific devices/browsers]
-- **Error Handling**: Users understand what went wrong and how to fix it
-- **Recovery**: Users can undo/retry critical actions
+#### Bot Structure
+```
+Bot Script → Platform API → Database
+(Simple, always-running)
+```
 
-## What We're NOT Building
+#### Web App Structure  
+```
+Frontend → Backend API → Database
+(Request-based, can be serverless)
+```
 
-List features that seem related but don't serve the core value:
-- [Feature that sounds good but doesn't solve core problem]
-- [Complex feature that can wait for v2]
-- [Nice-to-have that doesn't drive user behavior]
+### Automation Script Integration
+Include setup automation (reference docs/08_ai_collaboration.md section 4):
+- Auto-detect project type
+- Install dependencies
+- Create .env template
+- Run security checks
+- Start application
 
-**Why This Matters**: Saying no to good ideas enables yes to great execution.
+## 2-Week Timeline
 
-## Launch Criteria
-**When is this ready for real users?**
+### Week 1: Build Core (Make It Work)
+- **Day 1-2**: Database setup + basic API endpoints
+- **Day 3-4**: Core business logic (the main feature)
+- **Day 5-7**: Basic frontend that users can actually use
 
-- [ ] Core flow works end-to-end
-- [ ] Users can recover from common mistakes
-- [ ] System survives peak expected load
-- [ ] Business-critical data is protected
-- [ ] You can support users when things break
+**Goal**: Working demo you can show someone
 
-## Metrics That Matter
-**How do you know this is working?**
+### Week 2: Ship Safely (Make It Safe)
+- **Day 8-10**: Security basics (authentication, validation, error handling)
+- **Day 11-12**: Deploy to production + test with real users
+- **Day 13-14**: Fix critical bugs, add basic monitoring
 
-- **Usage**: [Specific user actions] per [timeframe]
-- **Value**: [Business metric] improvement after [timeframe]
-- **Adoption**: [Percentage] of target users complete core flow
-- **Retention**: [Percentage] return after [timeframe]
+**Goal**: Real users can use it without breaking
 
-**Anti-Metrics**: Vanity metrics that feel good but don't indicate success
+## Safety Requirements (Don't Skip These)
+
+### Security Basics (Choose Based on Project Type)
+
+#### Bot Security (For All Bot Types)
+- **Platform verification**: Verify requests actually come from platform (webhook signatures)
+- **Token protection**: Bot tokens in environment variables, NEVER in code
+- **User input validation**: Sanitize all messages/commands from users
+- **Rate limiting**: Prevent spam (max commands per user per minute)
+- **Command authorization**: Admin commands only for authorized users
+- **Payment security**: If handling subscriptions, use secure payment processors
+- **Database security**: Encrypt sensitive user data
+- **Error handling**: Don't crash bot on invalid input
+
+#### Web App Security (For Traditional Web Applications)
+- **Authentication**: Users must log in to access their data
+- **Input validation**: ALL inputs validated/sanitized (prevent SQL injection, XSS)
+- **Rate limiting**: Max 100 requests/minute per IP (prevent DDoS/spam)
+- **Error handling**: Never show stack traces or DB errors to users
+- **API security**: API keys required, validate on every request
+- **HTTPS**: All data encrypted + HSTS headers enabled
+- **WAF protection**: Web Application Firewall enabled (Cloudflare free plan)
+- **Fraud monitoring**: Alert on suspicious user behavior patterns
+
+### Data Protection
+- **Backups**: Daily automated backups (hosting platforms provide this)
+- **User data isolation**: Users only see their own data
+- **Privacy**: Don't log passwords or sensitive info
+- **Data validation**: Prevent data corruption with basic checks
+
+### Production Readiness
+- **Health checks**: Simple endpoint that says "app is running"
+- **Basic monitoring**: Know when app goes down (hosting platforms provide alerts)
+- **Error logging**: Save errors to debug later
+- **Simple rollback**: Can deploy previous version if needed
+
+## What NOT to Build
+
+### Skip These (Add Later If Needed)
+- **Admin dashboards** (use database tools for now)
+- **Complex user roles** (start with logged-in vs not-logged-in)
+- **Advanced features** (focus on core workflow)
+- **Perfect UI** (functional is better than pretty)
+- **Microservices** (one simple app is easier)
+- **Complex deployment** (use simple hosting platforms)
+
+### Red Flags (Stop If You're Doing This)
+- Planning for more than 2 weeks
+- Building features users haven't asked for
+- Optimizing for 1M users when you have 0
+- Creating complex architecture diagrams
+- Writing extensive documentation before code exists
+
+## Success Metrics
+
+### Week 1 Success
+- [ ] Core feature works end-to-end
+- [ ] You can demo it to someone
+- [ ] Database stores and retrieves data correctly
+- [ ] Frontend and backend communicate
+
+### Week 2 Success
+- [ ] App deployed and accessible via URL
+- [ ] Users can sign up and log in
+- [ ] Core feature works for real users
+- [ ] App doesn't crash under normal use
+- [ ] You can fix bugs when they occur
+
+### Overall Success
+- [ ] Real users complete the core workflow
+- [ ] App stays online without constant babysitting
+- [ ] Users return and use it again
+- [ ] You can build new features on this foundation
+
+---
+
+**Remember**: Perfect is the enemy of shipped. Build something people can use, then make it better based on real feedback.
