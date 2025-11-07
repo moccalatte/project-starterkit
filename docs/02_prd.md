@@ -19,10 +19,10 @@
 - **Bot Framework**: [Telegram Bot API/WhatsApp API/Discord.js]
 - **Backend**: [Node.js/Python for bot logic]
 - **Database**: [SQLite for simple bots, PostgreSQL for complex]
-- **Hosting**: [Railway/Render for always-on bots]
+- **Hosting**: [Digital Ocean, Railway/Render for always-on bots]
 - **Setup**: Automated with script (see docs/08_ai_collaboration.md)
 
-#### For Web App Projects  
+#### For Web App Projects
 - **Frontend**: [React/Next.js or simple HTML]
 - **Backend**: [Node.js/Python REST API]
 - **Database**: [PostgreSQL or SQLite]
@@ -37,7 +37,7 @@ Bot Script → Platform API → Database
 (Simple, always-running)
 ```
 
-#### Web App Structure  
+#### Web App Structure
 ```
 Frontend → Backend API → Database
 (Request-based, can be serverless)
