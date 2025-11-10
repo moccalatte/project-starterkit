@@ -70,6 +70,14 @@ Before production, these 3 areas will kill your business if wrong:
 - **Demand working examples** - not theoretical code
 - **Test edge cases** - AI is optimistic, reality isn't
 
+## Lead Engineer Build Standard
+1. **Architect, don’t improvise** – one pass should reveal the flow; no buried side effects.
+2. **Config beats constants** – every “magic number” lives in env/const, never inline.
+3. **Names = guarantees** – titles state behavior; comments cover intent only.
+4. **Refactor on day one** – small, testable units with written assumptions.
+5. **No vibe-coder dust** – tidy imports, lean deps, disciplined commits.
+6. **15-minute review rule** – if it takes longer, split it or add context.
+
 ## Emergency Procedures
 
 ### Security Breach
