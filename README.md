@@ -72,38 +72,40 @@ Prepare infrastructure, operational checklists, and documentation index.
 
 ---
 
-## Directory Structure
+## Directory Structure & File Descriptions
 
 ```
 project-starterkit/
 │
-├── docs/
-│   ├── 01-context.md
-│   ├── 02-dev_protocol.md
-│   ├── 03-prd.md
-│   ├── 04-uiux_flow.md
-│   ├── 05-architecture.md
-│   ├── 06-data_schema.md
-│   ├── 07-api_contracts.md
-│   ├── 08-integration_plan.md
-│   ├── 09-security_manifest.md
-│   ├── 10-audit_architecture.md
-│   ├── 11-anti_fraud_policy.md
-│   ├── 12-maintenance_plan.md
-│   ├── 13-recovery_strategy.md
-│   ├── 14-build_plan.md
-│   ├── 15-testing_strategy.md
-│   ├── 16-risk_register.md
-│   ├── 17-observability.md
-│   ├── 18-infra_plan.md
-│   ├── 19-ops_checklist.md
-│   ├── 20-docs_index.md
-│   ├── ai_collaboration.md
-│   ├── error_fix_guide.md
-│   ├── free_alternatives.md
-│   └── prompt.md
+├── docs/                        # Main documentation knowledge base for the project
+│   ├── 01-context.md            # Business and technical context, stakeholders, project scope
+│   ├── 02-dev_protocol.md       # Coding standards, workflows, and tooling
+│   ├── 03-prd.md                # Product Requirements Document (PRD)
+│   ├── 04-uiux_flow.md          # User journeys, main flows, and UI/UX design
+│   ├── 05-architecture.md       # High-level system architecture
+│   ├── 06-data_schema.md        # Database and audit log schemas
+│   ├── 07-api_contracts.md      # API endpoints and contracts
+│   ├── 08-integration_plan.md   # Integration plans for external/internal services
+│   ├── 09-security_manifest.md  # Security controls and practices
+│   ├── 10-audit_architecture.md # Audit logging and traceability
+│   ├── 11-anti_fraud_policy.md  # Anti-fraud measures and policies
+│   ├── 12-maintenance_plan.md   # Ongoing maintenance and support plans
+│   ├── 13-recovery_strategy.md  # Backup and disaster recovery strategies
+│   ├── 14-build_plan.md         # Build milestones and processes
+│   ├── 15-testing_strategy.md   # Testing approaches and coverage
+│   ├── 16-risk_register.md      # Project risk tracking and mitigation
+│   ├── 17-observability.md      # Monitoring, logging, and alerting plans
+│   ├── 18-infra_plan.md         # Infrastructure and environment specifications
+│   ├── 19-ops_checklist.md      # Go-live and operational checklists
+│   ├── 20-docs_index.md         # Central index for all documentation
+│   ├── ai_collaboration.md      # Guide for working productively with AI
+│   ├── error_fix_guide.md       # Workflow for reporting and fixing errors
+│   ├── free_alternatives.md     # Free/affordable services for hosting, DB, etc.
+│   └── prompt.md                # Philosophy and best practices for AI prompt design
 │
-└── README.md
+├── AGENTS.md                    # Guidance for using the docs folder as a knowledge base; instructions for agents on searching and updating documentation
+├── LICENSE                      # Project license (MIT License)
+└── README.md                    # This file
 ```
 
 ---
