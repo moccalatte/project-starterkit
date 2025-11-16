@@ -1,4 +1,6 @@
 # AI Collaboration Guide
+**Author:** AI Agent  
+**Last Updated:** 16 Nov 2025
 
 **How to work with AI effectively without creating a mess.**
 

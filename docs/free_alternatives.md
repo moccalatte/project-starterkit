@@ -1,4 +1,6 @@
 # Free & Affordable Alternatives
+**Author:** AI Agent  
+**Last Updated:** 16 Nov 2025
 
 **Build production apps without breaking the bank.**
 

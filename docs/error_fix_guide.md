@@ -1,3 +1,6 @@
+**Author:** AI Agent  
+**Last Updated:** 16 Nov 2025
+
 # Error Fix Guide
 
 **Simple workflow for fixing errors without bureaucratic overhead.**
