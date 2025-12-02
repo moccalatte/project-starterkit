@@ -1,7 +1,9 @@
-the folder 'docs'' is your knowledge base.
+# SaaS Monorepo Instructions
 
-- any missing info u need, search there first.
+## Context
+This folder acts as a monorepo containing multiple distinct project templates.
 
-- anything useful you see, dump there 
-
-𝚊_𝚟𝚎𝚛𝚢_𝚍𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚟𝚎_𝚏𝚒𝚕𝚎_𝚗𝚊𝚖𝚎.𝚖𝚍
+## Instructions
+1.  **Identify the Context**: Determine if the task relates to `webapp`, `bot`, `mobile`, or `ai`.
+2.  **Navigate**: Switch to the relevant subdirectory (e.g., `cd saas/webapp`).
+3.  **Read Local Instructions**: Each subdirectory has its own `AGENTS.md` and `docs/` folder. **Always** prioritize the local documentation over general assumptions.
