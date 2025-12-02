@@ -1,21 +1,20 @@
 # Web Application Project
 
-This directory contains the source code and documentation for the Web Application component of the SaaS platform.
+This directory contains the source code and documentation for the Web Application component.
 
 ## Getting Started
 
-1.  **Read the Docs**: Start with `docs/1_product_context.md` to understand the project scope.
-2.  **Environment Setup**: Check `docs/2_system_architecture.md` for the tech stack and prerequisites.
-3.  **Development Flow**: Refer to `docs/6_testing_qa.md` for testing and contribution guidelines.
+1.  **Context**: Read `docs/01-context.md` and `docs/03-product_requirements.md`.
+2.  **Standards**: Follow `docs/02-dev_protocol.md`.
+3.  **Setup**: Check `docs/04-system_architecture.md` for prerequisites.
 
 ## Documentation Index
 
-- **[Product Context](docs/1_product_context.md)**: PRD, User Stories, UI/UX Flows.
-- **[System Architecture](docs/2_system_architecture.md)**: Tech Stack, Database Schema, System Design.
-- **[Backend & API](docs/3_backend_api.md)**: API Endpoints, Data Models, Third-party Integrations.
-- **[Frontend Client](docs/4_frontend_client.md)**: UI Components, State Management, Routing.
-- **[Security & Ops](docs/5_security_ops.md)**: Security Policies, Deployment, CI/CD, Monitoring.
-- **[Testing & QA](docs/6_testing_qa.md)**: Testing Strategy, Quality Assurance.
-
-## Quick Commands
-*(Add your project specific commands here, e.g., `npm start`, `go run main.go`, etc.)*
+- **[01. Context](docs/01-context.md)**: Business goals and scope.
+- **[02. Dev Protocol](docs/02-dev_protocol.md)**: Coding standards and workflow.
+- **[03. PRD](docs/03-product_requirements.md)**: Features and requirements.
+- **[04. Architecture](docs/04-system_architecture.md)**: System design and stack.
+- **[05. Backend API](docs/05-backend_api.md)**: API contracts.
+- **[06. Frontend](docs/06-frontend_client.md)**: Client-side architecture.
+- **[07. Security & Ops](docs/07-security_ops.md)**: Deployment and safety.
+- **[08. Testing](docs/08-testing_qa.md)**: QA strategy.

@@ -3,14 +3,15 @@
 This folder contains the context and documentation for the **AI/ML** project.
 
 ## Your Knowledge Base
-The `docs/` folder is your primary source of truth.
-1.  **Search** `docs/` for model details and data pipelines.
-2.  **Read** `1_model_overview.md` to understand the problem and approach.
+1.  **Understand** the problem in `01-context.md`.
+2.  **Review** metrics in `03-product_requirements.md`.
+3.  **Adhere** to `02-dev_protocol.md` for experiments.
 
 ## Documentation Structure
-- `1_model_overview.md`: Problem statement, AI approach.
-- `2_data_pipeline.md`: Dataset source, cleaning, preprocessing.
-- `3_model_architecture.md`: Model selection, training, fine-tuning.
-- `4_evaluation.md`: Metrics, Benchmarks.
-- `5_deployment.md`: Inference API, Hardware requirements.
-- `6_ethics_safety.md`: Bias, Hallucination checks, Guardrails.
+- `01-context.md`: Business problem, objectives.
+- `02-dev_protocol.md`: Experiment tracking, version control.
+- `03-product_requirements.md`: Prediction targets, constraints.
+- `04-data_pipeline.md`: ETL, preprocessing.
+- `05-model_architecture.md`: Model selection, training.
+- `06-evaluation_safety.md`: Metrics, ethics, bias.
+- `07-deployment.md`: Inference API, serving.

@@ -1,16 +1,17 @@
 # AI/ML Project
 
-This directory contains the source code and documentation for the AI models and pipelines.
+This directory contains the source code and documentation for the AI models.
 
 ## Getting Started
-1.  **Data**: See `docs/2_data_pipeline.md`.
-2.  **Training**: See `docs/3_model_architecture.md`.
-3.  **Inference**: See `docs/5_deployment.md`.
+1.  **Problem**: `docs/01-context.md`.
+2.  **Workflow**: `docs/02-dev_protocol.md`.
+3.  **Pipeline**: `docs/04-data_pipeline.md`.
 
 ## Documentation Index
-- **[Model Overview](docs/1_model_overview.md)**: Problem & Solution.
-- **[Data Pipeline](docs/2_data_pipeline.md)**: ETL, Preprocessing.
-- **[Model Architecture](docs/3_model_architecture.md)**: Training, Hyperparameters.
-- **[Evaluation](docs/4_evaluation.md)**: Testing & Metrics.
-- **[Deployment](docs/5_deployment.md)**: Serving (API/Batch).
-- **[Ethics & Safety](docs/6_ethics_safety.md)**: Compliance, Safety checks.
+- **[01. Context](docs/01-context.md)**: Objectives.
+- **[02. Dev Protocol](docs/02-dev_protocol.md)**: Standards.
+- **[03. PRD](docs/03-product_requirements.md)**: Model requirements.
+- **[04. Data Pipeline](docs/04-data_pipeline.md)**: ETL process.
+- **[05. Architecture](docs/05-model_architecture.md)**: Model details.
+- **[06. Evaluation](docs/06-evaluation_safety.md)**: Performance & Safety.
+- **[07. Deployment](docs/07-deployment.md)**: Serving strategy.

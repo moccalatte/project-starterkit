@@ -1,13 +1,16 @@
 # Mobile Application
 
-This directory contains the source code and documentation for the Mobile App (iOS/Android).
+This directory contains the source code and documentation for the Mobile App.
 
 ## Getting Started
-1.  **Prerequisites**: See `docs/2_mobile_architecture.md`.
-2.  **Run**: `flutter run` / `npx react-native run-ios`.
+1.  **Concept**: `docs/01-context.md`.
+2.  **Environment**: `docs/02-dev_protocol.md`.
+3.  **Specs**: `docs/03-product_requirements.md`.
 
 ## Documentation Index
-- **[App Concept](docs/1_app_concept.md)**: Features, UX Design.
-- **[Architecture](docs/2_mobile_architecture.md)**: State Management, Navigation.
-- **[API & Sync](docs/3_api_integration.md)**: Data fetching, Offline capability.
-- **[Store & Release](docs/4_store_release.md)**: Signing, Publishing, Beta testing.
+- **[01. Context](docs/01-context.md)**: App goals.
+- **[02. Dev Protocol](docs/02-dev_protocol.md)**: Setup and standards.
+- **[03. PRD](docs/03-product_requirements.md)**: Functional requirements.
+- **[04. Architecture](docs/04-mobile_architecture.md)**: Code structure.
+- **[05. API & Sync](docs/05-api_integration.md)**: Backend integration.
+- **[06. Release](docs/06-store_release.md)**: Publishing guide.
